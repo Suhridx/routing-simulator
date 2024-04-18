@@ -5,7 +5,7 @@ import simulator from "./functions/router";
 import Dropdown from "./utils/Dropdown";
 
 export const Top = ({ setShow }) => {
-  const [simulate, setSimulate] = useState(false);
+  const [simulate, setSimulate] = useState(0);
   const { connectionArray, appData } = useContext(AppContext);
   const { nodes, pathArray, setPathArray } = useContext(MessageContext);
   const [posArray, setPosArray] = useState([]);
@@ -24,22 +24,22 @@ export const Top = ({ setShow }) => {
     setPosArray(newPosArray);
 
     // Reset currentIndex when posArray changes
-    setCurrentIndex(0);
+    // setCurrentIndex(0);
   }, [pathArray, appData]);
 
   // Move to the next position at regular intervals
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setCurrentIndex(prevIndex => {
-        if (prevIndex === posArray.length - 1) {
-          clearInterval(intervalId); // Stop interval when reaching the end
-        }
-        return prevIndex < posArray.length - 1 ? prevIndex + 1 : prevIndex;
-      });
-    }, 1000); // Adjust interval duration as needed
+  // useEffect(() => {
+  //   const intervalId = setInterval(() => {
+  //     setCurrentIndex(prevIndex => {
+  //       if (prevIndex === posArray.length - 1) {
+  //         clearInterval(intervalId); // Stop interval when reaching the end
+  //       }
+  //       return prevIndex < posArray.length - 1 ? prevIndex + 1 : prevIndex;
+  //     });
+  //   }, 1000); // Adjust interval duration as needed
 
-    return () => clearInterval(intervalId); // Cleanup interval on component unmount
-  }, [posArray]);
+  //   return () => clearInterval(intervalId); // Cleanup interval on component unmount
+  // }, [posArray]);
 
   function handleClick() {
     if (nodes.length == 0) {
@@ -50,6 +50,9 @@ export const Top = ({ setShow }) => {
     setSimulate(1);
     setShow(true);
     simulator(connectionArray, nodes, setSimulate, setPathArray);
+    setTimeout(() => {
+      setSimulate(0)
+    }, 1000);
   }
 
   const mystyle = {
@@ -65,8 +68,9 @@ export const Top = ({ setShow }) => {
   // Calculate span position based on current index
   const spanStyle = {
     position: 'absolute',
-    left: posArray[currentIndex]?.x ?? 0,
-    top: posArray[currentIndex]?.y ?? 0,
+    color:"#c2a532",
+    left: posArray[0]?.x ?? 0,
+    top: posArray[0]?.y ?? 0,
   };
 
   return (
