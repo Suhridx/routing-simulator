@@ -43,8 +43,6 @@ const CanvasDrawer = ({ mouse ,iconId }) => {
       }
     });
     setPosArray(newPosArray);
-
-    // Reset currentIndex when posArray changes
     setCurrentIndex(0);
   }, [pathArray, appData]);
 

@@ -97,7 +97,8 @@ export const Top = ({ setShow }) => {
         />
         <text style={{ fontSize: "1rem" }}>Routing Simulator</text>
       </div>
-      {simulate ? <div className="loader2"></div> : ""}
+      {simulate==1 ? <div className="loader2"></div> : ""}
+      {simulate==2 ? <div className="loader-2"></div> : ""}
       <div style={{ paddingRight: "30px" }}>
         <button
           className="button-10"
