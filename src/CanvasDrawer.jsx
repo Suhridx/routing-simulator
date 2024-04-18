@@ -27,9 +27,10 @@ const CanvasDrawer = ({ mouse ,iconId }) => {
   const spanStyle = {
     position: 'absolute',
     color:"#c2a532",
-    zIndex:"10",
-    left: posArray[currentIndex]?.x +15,
-    top: posArray[currentIndex]?.y +15,
+    // zIndex:"2",
+    left: posArray[currentIndex]?.x ,
+    top: posArray[currentIndex]?.y,
+    transition : "left 2s, top 2s"
   };
 
   useEffect(() => {
@@ -56,7 +57,7 @@ const CanvasDrawer = ({ mouse ,iconId }) => {
         }
         return prevIndex < posArray.length - 1 ? prevIndex + 1 : prevIndex;
       });
-    }, 1000); // Adjust interval duration as needed
+    }, 2500); // Adjust interval duration as needed
 
     return () => clearInterval(intervalId); // Cleanup interval on component unmount
   }, [posArray]);
@@ -161,19 +162,21 @@ const CanvasDrawer = ({ mouse ,iconId }) => {
 };
 
   return (
+    <>
+    {pathArray.length>1?
+      <span className="material-symbols-outlined" style={spanStyle}>
+        mail
+      </span>:""
+    }
     <canvas
       style={{ width: "100%",height:"86vh", zIndex:"2" }}
       id="canvas"
       // onMouseDown={handleMouseDown}
       onMouseMove={mouse==2 && iconId ?handleMouseMove:()=>{}}
       onContextMenu={mouse==2 && iconId?handleContextMenu:()=>{}}
-    >
-      {pathArray.length>1?
-      <span className="material-symbols-outlined" style={spanStyle}>
-        mail
-      </span>:""
-    }
+      >
     </canvas>
+      </>
   );
 };
 
