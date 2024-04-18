@@ -1,4 +1,4 @@
-import logo from "./assets/neural-network.png";
+import logo from "./assets/bg.gif";
 import "./App.css";
 import { Link } from "react-router-dom";
 
