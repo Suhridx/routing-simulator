@@ -9,7 +9,7 @@ const Result = ({ setShow }) => {
   const getNamesFromIDs = () => {
     if(pathArray.includes("0000"))
     {
-      matchedNames.push({name:"NO PATH FOUND",type:""})
+      matchedNames.push({name:"NOT FOUND",type:""})
       return
     }
     // Iterate over pathArray
@@ -95,7 +95,7 @@ const Result = ({ setShow }) => {
             </p>
           )}
           {matchedNames.map((item, index) => (
-            <>
+            <React.Fragment key={index}>
               <div
                 key={item.id}
                 style={{
@@ -118,7 +118,7 @@ const Result = ({ setShow }) => {
                 <p className="barlow-thin">{item.name}</p>
               </div>
               {index < matchedNames.length - 1 && <span>&nbsp;--&gt;</span>}
-            </>
+            </React.Fragment>
           ))}
         </div>
       </div>

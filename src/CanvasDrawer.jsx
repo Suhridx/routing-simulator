@@ -77,7 +77,7 @@ const CanvasDrawer = ({ mouse ,iconId }) => {
   useEffect(() => {
     setElements([]);
     if (connectionArray.length < 1) {
-      console.log("No connections");
+      // console.log("No connections");
       return;
     }
   

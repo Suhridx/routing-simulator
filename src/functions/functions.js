@@ -12,7 +12,7 @@ export function remove(e, appData, setAppData, setConnectionArray) {
       return filteredArray;
     });
   }
-  console.log(appData);
+  // console.log(appData);
 }
 
 let firstId = null; // Variable to store the first clicked ID
@@ -29,7 +29,7 @@ export function connect(e, setMouse, connectionArray, setConnectionArray) {
       firstId = null;
       return;
     }
-    console.log("Select another node to connect with...");
+    // console.log("Select another node to connect with...");
     return firstId;
   } else if (firstId != secondId) {
     if (secondId.startsWith("P")) {
@@ -47,7 +47,7 @@ export function connect(e, setMouse, connectionArray, setConnectionArray) {
     }
     const connectedIds = [firstId, secondId];
     setConnectionArray((prev) => [...prev, connectedIds]);
-    console.log(connectedIds);
+    // console.log(connectedIds);
     firstId = null;
     setMouse(0);
     return firstId;
@@ -96,7 +96,7 @@ export function message(e, message_in, setMouse, setNodes) {
     firstNode = secondNode;
     setNodes([firstNode]);
     document.body.style.cursor = `url(${message_in}), auto`;
-    console.log("Select another node to send message...");
+    // console.log("Select another node to send message...");
   } else if (firstNode != secondNode) {
     setNodes([firstNode, secondNode]);
     setMouse(0);

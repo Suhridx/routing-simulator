@@ -95,15 +95,15 @@ export const Top = ({ setShow }) => {
           alt="Vite logo"
           style={{ height: "2rem" }}
         />
-        <text style={{ fontSize: "1rem" }}>Routing Simulator</text>
+        <p style={{ fontSize: "1rem" }}>Routing Simulator</p>
       </div>
       {simulate==1 ? <div className="loader2"></div> : ""}
       {simulate==2 ? <div className="loader-2"></div> : ""}
       <div style={{ paddingRight: "30px" }}>
         <button
           className="button-10"
-          onClick={handleClick}
-          disabled={simulate ? true : false}
+          onClick={simulate==0?handleClick:()=>setSimulate(0)}
+          disabled={simulate==1 ? true : false}
         >
           {simulate == 2
             ? "Simulating..."

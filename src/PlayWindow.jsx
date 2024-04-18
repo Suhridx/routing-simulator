@@ -70,7 +70,7 @@ const PlayWindow = ({ mouse, setMouse }) => {
     }
     if (mouse === 2) {
       let id = connect(e, setMouse, connectionArray, setConnectionArray);
-      console.log(id);
+      // console.log(id);
       setIconId(id);
     }
     if (mouse === 7) {
@@ -101,14 +101,14 @@ const PlayWindow = ({ mouse, setMouse }) => {
       >
         <CanvasDrawer mouse={mouse} iconId={iconId} />
       </div>
-          {nodes.map((node) => {
+          {nodes.map((node,index) => {
             const appObject = appData.find((item) => item.id === node);
             if (appObject) {
               const { x, y } = appObject;
               return (
                 <span
                 className="material-symbols-outlined"
-                  key={node.id}
+                  key={index}
                   style={{ position: "absolute", left: x+20, top: y-10,zIndex:"10" }}
                 >
                   sms
