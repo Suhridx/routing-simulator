@@ -6,7 +6,7 @@ import React, {
   useState,
 } from "react";
 import rough from "roughjs/bundled/rough.esm";
-import { AppContext } from "./AppContext";
+import { AppContext, MessageContext } from "./AppContext";
 
 const generator = rough.generator();
 
@@ -19,7 +19,47 @@ const createElement = (x1, y1, x2, y2,color) => {
 
 const CanvasDrawer = ({ mouse ,iconId }) => {
   const { appData,connectionArray } = useContext(AppContext);
+  const {pathArray} = useContext(MessageContext)
   const [elements, setElements] = useState([]);
+  const [posArray, setPosArray] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const spanStyle = {
+    position: 'absolute',
+    color:"#c2a532",
+    zIndex:"10",
+    left: posArray[currentIndex]?.x +15,
+    top: posArray[currentIndex]?.y +15,
+  };
+
+  useEffect(() => {
+    const newPosArray = [];
+    pathArray.forEach(pathId => {
+      const appObject = appData.find(item => item.id === pathId);
+      if (appObject) {
+        const { x, y } = appObject;
+        newPosArray.push({ x, y });
+      }
+    });
+    setPosArray(newPosArray);
+
+    // Reset currentIndex when posArray changes
+    setCurrentIndex(0);
+  }, [pathArray, appData]);
+
+    // Move to the next position at regular intervals
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentIndex(prevIndex => {
+        if (prevIndex === posArray.length - 1) {
+          clearInterval(intervalId); // Stop interval when reaching the end
+        }
+        return prevIndex < posArray.length - 1 ? prevIndex + 1 : prevIndex;
+      });
+    }, 1000); // Adjust interval duration as needed
+
+    return () => clearInterval(intervalId); // Cleanup interval on component unmount
+  }, [posArray]);
 
 
   
@@ -128,7 +168,11 @@ const CanvasDrawer = ({ mouse ,iconId }) => {
       onMouseMove={mouse==2 && iconId ?handleMouseMove:()=>{}}
       onContextMenu={mouse==2 && iconId?handleContextMenu:()=>{}}
     >
-      canvas
+      {pathArray.length>1?
+      <span className="material-symbols-outlined" style={spanStyle}>
+        mail
+      </span>:""
+    }
     </canvas>
   );
 };

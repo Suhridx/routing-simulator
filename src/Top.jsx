@@ -66,11 +66,11 @@ export const Top = ({ setShow }) => {
   };
 
   // Calculate span position based on current index
-  const spanStyle = {
-    position: 'absolute',
-    left: posArray[currentIndex]?.x ?? 0,
-    top: posArray[currentIndex]?.y ?? 0,
-  };
+  // const spanStyle = {
+  //   position: 'absolute',
+  //   left: posArray[currentIndex]?.x ?? 0,
+  //   top: posArray[currentIndex]?.y ?? 0,
+  // };
 
   return (
     <div style={mystyle}>
