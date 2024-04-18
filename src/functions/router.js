@@ -1,12 +1,12 @@
 export default function simulator(connectionArray,nodes,setSimulate,setPathArray)
 {
     console.log("Simulating");
-    // setTimeout(() => {
+    setTimeout(() => {
       const paths = findShortestPath(connectionArray, nodes[0], nodes[1]);
       console.log(paths);
       setPathArray(paths)
       setSimulate(2)
-    // }, connectionArray.length*300);
+    }, 1000);
     
  
 }
