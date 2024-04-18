@@ -8,24 +8,24 @@ export const Top = ({ setShow }) => {
   const [simulate, setSimulate] = useState(0);
   const { connectionArray, appData } = useContext(AppContext);
   const { nodes, pathArray, setPathArray } = useContext(MessageContext);
-  const [posArray, setPosArray] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  // const [posArray, setPosArray] = useState([]);
+  // const [currentIndex, setCurrentIndex] = useState(0);
   const [showMenu,setShowMenu] = useState(false)
 
-  useEffect(() => {
-    const newPosArray = [];
-    pathArray.forEach(pathId => {
-      const appObject = appData.find(item => item.id === pathId);
-      if (appObject) {
-        const { x, y } = appObject;
-        newPosArray.push({ x, y });
-      }
-    });
-    setPosArray(newPosArray);
+  // useEffect(() => {
+  //   const newPosArray = [];
+  //   pathArray.forEach(pathId => {
+  //     const appObject = appData.find(item => item.id === pathId);
+  //     if (appObject) {
+  //       const { x, y } = appObject;
+  //       newPosArray.push({ x, y });
+  //     }
+  //   });
+  //   setPosArray(newPosArray);
 
-    // Reset currentIndex when posArray changes
-    // setCurrentIndex(0);
-  }, [pathArray, appData]);
+  //   // Reset currentIndex when posArray changes
+  //   // setCurrentIndex(0);
+  // }, [pathArray, appData]);
 
   // Move to the next position at regular intervals
   // useEffect(() => {
@@ -52,7 +52,7 @@ export const Top = ({ setShow }) => {
     simulator(connectionArray, nodes, setSimulate, setPathArray);
     setTimeout(() => {
       setSimulate(0)
-    }, 1000);
+    }, pathArray.length*1000);
   }
 
   const mystyle = {

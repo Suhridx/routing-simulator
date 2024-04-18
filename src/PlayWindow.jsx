@@ -16,18 +16,19 @@ import message_in from "./assets/message-2.png";
 
 
 const PlayWindow = ({ mouse, setMouse }) => {
-  const { appData, setAppData, connectionArray, setConnectionArray } =
-    useContext(AppContext);
+  const { appData, setAppData, connectionArray, setConnectionArray } =useContext(AppContext);
   const { nodes, setNodes,pathArray } = useContext(MessageContext);
   const [iconId, setIconId] = useState();
   const [posArray, setPosArray] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
 
   const spanStyle = {
     position: 'absolute',
     color:"#c2a532",
     zIndex:"10",
-    left: posArray[0]?.x +20,
-    top: posArray[0]?.y -12,
+    left: posArray[currentIndex]?.x +20,
+    top: posArray[currentIndex]?.y -12,
   };
 
 
@@ -43,8 +44,22 @@ const PlayWindow = ({ mouse, setMouse }) => {
     setPosArray(newPosArray);
 
     // Reset currentIndex when posArray changes
-    // setCurrentIndex(0);
+    setCurrentIndex(0);
   }, [pathArray, appData]);
+
+    // Move to the next position at regular intervals
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentIndex(prevIndex => {
+        if (prevIndex === posArray.length - 1) {
+          clearInterval(intervalId); // Stop interval when reaching the end
+        }
+        return prevIndex < posArray.length - 1 ? prevIndex + 1 : prevIndex;
+      });
+    }, 1000); // Adjust interval duration as needed
+
+    return () => clearInterval(intervalId); // Cleanup interval on component unmount
+  }, [posArray]);
 
   function handleClick(e) {
     const containerRect = document
