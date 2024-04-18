@@ -66,13 +66,7 @@ export const Top = ({ setShow }) => {
   };
 
   // Calculate span position based on current index
-  const spanStyle = {
-    position: 'absolute',
-    color:"#c2a532",
-    left: posArray[0]?.x ?? 0,
-    top: posArray[0]?.y ?? 0,
-  };
-
+  
   return (
     <div style={mystyle}>
       <div
@@ -112,11 +106,7 @@ export const Top = ({ setShow }) => {
             : "Send Packet"}
         </button>
       </div>
-      {pathArray.length>1?
-      <span className="material-symbols-outlined" style={spanStyle}>
-        mail
-      </span>:""
-    }
+
       {showMenu &&<Dropdown setShowMenu={setShowMenu}/>}
     </div>
   );

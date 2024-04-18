@@ -38,7 +38,8 @@ const Result = ({ setShow }) => {
         // border:"1px solid black",
         boxShadow: " 0px 0px 9px -1px rgba(0,0,0,0.44)",
         borderRadius: "10px",
-        // backgroundColor: "red",
+        zIndex: "10",
+        backgroundColor: "white",
         animation: "myAnim 1s ease 0s 1 normal none",
       }}
     >

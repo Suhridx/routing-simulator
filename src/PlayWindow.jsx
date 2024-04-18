@@ -1,4 +1,4 @@
-import React, { useContext, useLayoutEffect, useState } from "react";
+import React, { useContext, useState ,useEffect} from "react";
 import { AppContext, MessageContext } from "./AppContext";
 import {
   remove,
@@ -18,8 +18,33 @@ import message_in from "./assets/message-2.png";
 const PlayWindow = ({ mouse, setMouse }) => {
   const { appData, setAppData, connectionArray, setConnectionArray } =
     useContext(AppContext);
-  const { nodes, setNodes } = useContext(MessageContext);
+  const { nodes, setNodes,pathArray } = useContext(MessageContext);
   const [iconId, setIconId] = useState();
+  const [posArray, setPosArray] = useState([]);
+
+  const spanStyle = {
+    position: 'absolute',
+    color:"#c2a532",
+    zIndex:"10",
+    left: posArray[0]?.x +20,
+    top: posArray[0]?.y -12,
+  };
+
+
+  useEffect(() => {
+    const newPosArray = [];
+    pathArray.forEach(pathId => {
+      const appObject = appData.find(item => item.id === pathId);
+      if (appObject) {
+        const { x, y } = appObject;
+        newPosArray.push({ x, y });
+      }
+    });
+    setPosArray(newPosArray);
+
+    // Reset currentIndex when posArray changes
+    // setCurrentIndex(0);
+  }, [pathArray, appData]);
 
   function handleClick(e) {
     const containerRect = document
@@ -114,6 +139,11 @@ const PlayWindow = ({ mouse, setMouse }) => {
             }
             return null;
           })}
+          {pathArray.length>1?
+      <span className="material-symbols-outlined" style={spanStyle}>
+        mail
+      </span>:""
+    }
       {appData.map((item, index) => (
         <div
           key={index}
