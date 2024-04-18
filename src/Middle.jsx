@@ -24,6 +24,8 @@ const Middle = () => {
       setSelected(4)
       if(e.key=='w')
       setSelected(2)
+      if(e.key=='m')
+      setSelected(7)
     })
     if(selected===1)
      document.body.style.cursor="move";
