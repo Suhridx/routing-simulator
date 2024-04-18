@@ -26,8 +26,8 @@ const CanvasDrawer = ({ mouse ,iconId }) => {
 
   const spanStyle = {
     position: 'absolute',
-    color:"#c2a532",
-    // zIndex:"2",
+    color:"#debf64",
+    zIndex:"2",
     left: posArray[currentIndex]?.x ,
     top: posArray[currentIndex]?.y,
     transition : "left 2s, top 2s"
