@@ -27,9 +27,8 @@ const PlayWindow = ({ mouse, setMouse }) => {
     position: 'absolute',
     color:"#c2a532",
     zIndex:"10",
-    left: posArray[currentIndex]?.x +15,
-    top: posArray[currentIndex]?.y -5,
-    transition: 'left 2s, top 2s'
+    left: posArray[currentIndex]?.x +20,
+    top: posArray[currentIndex]?.y -12,
   };
 
 
@@ -57,7 +56,7 @@ const PlayWindow = ({ mouse, setMouse }) => {
         }
         return prevIndex < posArray.length - 1 ? prevIndex + 1 : prevIndex;
       });
-    }, 2500); // Adjust interval duration as needed
+    }, 1000); // Adjust interval duration as needed
 
     return () => clearInterval(intervalId); // Cleanup interval on component unmount
   }, [posArray]);
