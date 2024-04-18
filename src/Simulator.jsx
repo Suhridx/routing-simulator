@@ -9,7 +9,7 @@ const Simulator = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    setTimeout(() => setIsLoading(false), 1150);
+    setTimeout(() => setIsLoading(false), 2000);
   }, []);
 
   return isLoading ? (

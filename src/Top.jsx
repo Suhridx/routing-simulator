@@ -5,7 +5,7 @@ import simulator from "./functions/router";
 import Dropdown from "./utils/Dropdown";
 
 export const Top = ({ setShow }) => {
-  const [simulate, setSimulate] = useState(0);
+  const [simulate, setSimulate] = useState(false);
   const { connectionArray, appData } = useContext(AppContext);
   const { nodes, pathArray, setPathArray } = useContext(MessageContext);
   // const [posArray, setPosArray] = useState([]);
@@ -23,23 +23,23 @@ export const Top = ({ setShow }) => {
   //   });
   //   setPosArray(newPosArray);
 
-  //   // Reset currentIndex when posArray changes
-  //   // setCurrentIndex(0);
-  // }, [pathArray, appData]);
+    // Reset currentIndex when posArray changes
+    setCurrentIndex(0);
+  }, [pathArray, appData]);
 
   // Move to the next position at regular intervals
-  // useEffect(() => {
-  //   const intervalId = setInterval(() => {
-  //     setCurrentIndex(prevIndex => {
-  //       if (prevIndex === posArray.length - 1) {
-  //         clearInterval(intervalId); // Stop interval when reaching the end
-  //       }
-  //       return prevIndex < posArray.length - 1 ? prevIndex + 1 : prevIndex;
-  //     });
-  //   }, 1000); // Adjust interval duration as needed
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentIndex(prevIndex => {
+        if (prevIndex === posArray.length - 1) {
+          clearInterval(intervalId); // Stop interval when reaching the end
+        }
+        return prevIndex < posArray.length - 1 ? prevIndex + 1 : prevIndex;
+      });
+    }, 1000); // Adjust interval duration as needed
 
-  //   return () => clearInterval(intervalId); // Cleanup interval on component unmount
-  // }, [posArray]);
+    return () => clearInterval(intervalId); // Cleanup interval on component unmount
+  }, [posArray]);
 
   function handleClick() {
     if (nodes.length == 0) {
@@ -66,7 +66,12 @@ export const Top = ({ setShow }) => {
   };
 
   // Calculate span position based on current index
-  
+  const spanStyle = {
+    position: 'absolute',
+    left: posArray[currentIndex]?.x ?? 0,
+    top: posArray[currentIndex]?.y ?? 0,
+  };
+
   return (
     <div style={mystyle}>
       <div
