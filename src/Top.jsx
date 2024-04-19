@@ -50,9 +50,7 @@ export const Top = ({ setShow }) => {
     setSimulate(1);
     setShow(true);
     simulator(connectionArray, nodes, setSimulate, setPathArray);
-    setTimeout(() => {
-      setSimulate(0)
-    }, pathArray.length*2500+1000);
+
   }
 
   const mystyle = {

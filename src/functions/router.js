@@ -1,26 +1,33 @@
-export default function simulator(connectionArray,nodes,setSimulate,setPathArray)
-{
+export default function simulator(connectionArray, nodes, setSimulate, setPathArray) {
     console.log("Simulating");
     setTimeout(() => {
-      const paths = findShortestPath(connectionArray, nodes[0], nodes[1]);
-      console.log(paths);
-      setPathArray(paths)
-      setSimulate(2)
+        const paths = findShortestPath(connectionArray, nodes[0], nodes[1]);
+        console.log(paths);
+        setPathArray(paths)
+        setSimulate(2)
+        if (paths.length == 1)
+            setSimulate(0)
+        else
+        {
+            setTimeout(() => {
+                setSimulate(0)
+              }, paths.length*2500+1000);
+        }
     }, 1000);
-    
- 
+
+
 }
 
 
-  
+
 // function findPaths(connections, startNode, endNode) {
 //     console.log("Connections:", connections);
 //     console.log("Start Node:", startNode);
 //     console.log("End Node:", endNode);
-  
+
 //     const visited = new Set();
 //     const paths = [];
-  
+
 //     function dfs(node, path) {
 //       if (node === endNode) {
 //         paths.push(path);
@@ -37,14 +44,14 @@ export default function simulator(connectionArray,nodes,setSimulate,setPathArray
 //       }
 //       visited.delete(node);
 //     }
-  
+
 //     dfs(startNode, []);
-  
+
 //     return paths;
 //   }
-  
 
-  function findShortestPath(connections, startNode, endNode) {
+
+function findShortestPath(connections, startNode, endNode) {
     const queue = [[startNode]];
     const visited = new Set([startNode]);
 
@@ -71,6 +78,5 @@ export default function simulator(connectionArray,nodes,setSimulate,setPathArray
     return ["0000"];
 }
 
-  
-  
-  
+
+
